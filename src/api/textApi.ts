@@ -5,10 +5,13 @@ interface SendTextParams {
   oneTime: boolean;
 }
 
-const sendText = async ({ text, oneTime }: SendTextParams): Promise<string> => {
+export const sendText = async ({ text, oneTime }: SendTextParams): Promise<string> => {
   const response = await axiosClient.post('/text/', { text, oneTime });
   const textId = response.data.id;
   return `${window.location.origin}/get/${textId}`;
 };
 
-export default sendText;
+export const fetchText = async (textId: string): Promise<string> => {
+  const response = await axiosClient.get(`/text/${textId}`);
+  return response.data.text;
+};

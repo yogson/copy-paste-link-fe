@@ -1,28 +1,21 @@
-import React, { useState } from 'react';
+import React from 'react';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import TextForm from './components/TextForm';
-import LinkModal from './components/LinkModal';
-import { Container, Typography } from '@mui/material';
+import RetrieveText from './components/RetrieveText';
+import { Container, Box } from '@mui/material';
 
 const App: React.FC = () => {
-  const [open, setOpen] = useState(false);
-  const [link, setLink] = useState('');
-
-  const handleFormSubmit = (data: { text: string; oneTime: boolean }) => {
-    const generatedLink = `http://example.com/secret/${Date.now()}`;
-    setLink(generatedLink);
-    setOpen(true);
-  };
-
-  const handleClose = () => setOpen(false);
-
   return (
-    <Container>
-      <Typography variant="h4" component="h1" gutterBottom>
-        Copy-Paste Link Service
-      </Typography>
-      <TextForm onSubmit={handleFormSubmit} />
-      <LinkModal open={open} handleClose={handleClose} link={link} />
-    </Container>
+    <Router>
+      <Box sx={{ height: '100vh', display: 'flex', flexDirection: 'column' }}>
+        <Container sx={{ flexGrow: 1 }}>
+          <Routes>
+            <Route path="/get/:id" element={<RetrieveText />} />
+            <Route path="/" element={<TextForm />} />
+          </Routes>
+        </Container>
+      </Box>
+    </Router>
   );
 };
 
