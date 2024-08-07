@@ -20,7 +20,7 @@ const TextForm: React.FC<TextFormProps> = ({ onSubmit }) => {
         {...register('text', { required: true })}
         label="Enter your text"
         multiline
-        rows={10}
+        rows={30}
         variant="outlined"
         fullWidth
         margin="normal"

@@ -18,7 +18,7 @@ const App: React.FC = () => {
   return (
     <Container>
       <Typography variant="h4" component="h1" gutterBottom>
-        Secret Link Service
+        Copy-Paste Link Service
       </Typography>
       <TextForm onSubmit={handleFormSubmit} />
       <LinkModal open={open} handleClose={handleClose} link={link} />
