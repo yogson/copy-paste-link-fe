@@ -29,5 +29,5 @@ footer {
 .content {
   flex: 1;
   padding: 1rem;
-  padding-bottom: 3rem; /* Add padding to the bottom to avoid overlap with the footer */
+  padding-bottom: 1rem;
 }
