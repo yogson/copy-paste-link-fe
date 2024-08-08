@@ -58,16 +58,18 @@ const LinkModal: React.FC<LinkModalProps> = ({ open, handleClose, link, code }) 
           <CloseIcon />
         </IconButton>
         <Typography variant="h6" component="h2" sx={{ mb: 2 }}>
-          Your link is available during 24 hours
+          Your data is available during 24 hours
         </Typography>
         <Typography variant="body1" className="modal-link" sx={{ mb: 2 }}>
           <a href={link} target="_blank" rel="noopener noreferrer">
             {link}
           </a>
         </Typography>
-        <Typography variant="body1" component="h2" sx={{ mb: 2 }}>
-          Short code for 1 minute: {code}
-        </Typography>
+        {code && (
+                  <Typography variant="body1" component="h2" sx={{ mb: 2 }}>
+                    Short code for 1 minute: <b>{code}</b>
+                  </Typography>
+                )}
         <Box className="modal-button" sx={{ mt: 3, display: 'flex', justifyContent: 'flex-end' }}>
           <Button
             onClick={handleCopyAndClose}

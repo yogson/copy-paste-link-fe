@@ -38,9 +38,21 @@ const RetrieveByCode: React.FC = () => {
       {error && <Alert severity="error" sx={{ mt: 2 }}>{error}</Alert>}
       {text && (
         <Paper sx={{ mt: 2, p: 2 }}>
-          <Typography variant="body1" component="p" sx={{ whiteSpace: 'pre-wrap' }}>
-            {text}
-          </Typography>
+                <TextField
+                value={text || ''}
+                multiline
+                rows={25}
+                variant="outlined"
+                fullWidth
+                margin="normal"
+                InputProps={{
+                readOnly: true,
+                }}
+                sx={{
+                whiteSpace: 'pre-wrap',
+                wordBreak: 'break-word',
+                }}
+            />
         </Paper>
       )}
     </Container>
