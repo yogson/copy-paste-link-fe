@@ -71,7 +71,7 @@ const RetrieveText: React.FC = () => {
       <TextField
         value={text || ''}
         multiline
-        rows={30}
+        rows={25}
         variant="outlined"
         fullWidth
         margin="normal"
