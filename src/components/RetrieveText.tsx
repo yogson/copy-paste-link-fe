@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { fetchText } from '../api/textApi';
-import { Container, Typography, CircularProgress, Alert, TextField, Box, Button } from '@mui/material';
+import { Container, Typography, CircularProgress, Alert, Button, Paper } from '@mui/material';
 import axios from 'axios';
+import ResizableTextField from './ResizableTextField';
 
 const RetrieveText: React.FC = () => {
   const { id } = useParams<{ id: string }>();
@@ -41,8 +42,10 @@ const RetrieveText: React.FC = () => {
       try {
         await navigator.clipboard.writeText(text);
         setCopySuccess('Text copied to clipboard!');
+        setTimeout(() => setCopySuccess(null), 3000); // Hide message after 3 seconds
       } catch (error) {
         setCopySuccess('Failed to copy text.');
+        setTimeout(() => setCopySuccess(null), 3000); // Hide message after 3 seconds
       }
     }
   };
@@ -68,34 +71,32 @@ const RetrieveText: React.FC = () => {
       <Typography variant="h4" component="h1" gutterBottom>
         Your Text
       </Typography>
-      <TextField
-        value={text || ''}
-        multiline
-        rows={25}
-        variant="outlined"
-        fullWidth
-        margin="normal"
-        InputProps={{
-          readOnly: true,
-        }}
-        sx={{
-          whiteSpace: 'pre-wrap',
-          wordBreak: 'break-word',
-        }}
-      />
-      <Button
-        variant="contained"
-        color="primary"
-        onClick={handleCopy}
-        sx={{ marginTop: 2 }}
-      >
-        Copy Text
-      </Button>
-      {copySuccess && (
-        <Alert severity="success" sx={{ marginTop: 2 }}>
-          {copySuccess}
-        </Alert>
-      )}
+      <Paper elevation={3} sx={{ p: 3, width: '100%', maxWidth: 1200 }}>
+        <ResizableTextField
+          value={text || ''}
+          InputProps={{
+            readOnly: true,
+          }}
+          sx={{
+            whiteSpace: 'pre-wrap',
+            wordBreak: 'break-word',
+          }}
+        />
+        <Button
+          variant="contained"
+          color="primary"
+          onClick={handleCopy}
+          sx={{ marginTop: 2 }}
+          disabled={!text} // Disable button if no text
+        >
+          Copy Text
+        </Button>
+        {copySuccess && (
+          <Alert severity={copySuccess.includes('copied') ? 'success' : 'error'} sx={{ marginTop: 2 }}>
+            {copySuccess}
+          </Alert>
+        )}
+      </Paper>
     </Container>
   );
 };

@@ -4,7 +4,6 @@ import TextForm from './components/TextForm';
 import RetrieveText from './components/RetrieveText';
 import { Box } from '@mui/material';
 import './App.css';
-import RetrieveByCode from './components/RetrieveByCode';
 
 const App: React.FC = () => {
   return (
@@ -13,7 +12,7 @@ const App: React.FC = () => {
         <div className="content">
           <Routes>
             <Route path="/get/:id" element={<RetrieveText />} />
-            <Route path="/by-code" element={<RetrieveByCode />} />
+            <Route path="/by-code" element={<RetrieveText />} />
             <Route path="/" element={<TextForm />} />
           </Routes>
         </div>
